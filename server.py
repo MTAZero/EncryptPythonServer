@@ -29,6 +29,8 @@ def encrypt_file(key, in_filename, out_filename=None, chunksize=64*1024):
 
                 outfile.write(encryptor.encrypt(chunk))
 
+                
+
 def decrypt_file(key, in_filename, out_filename=None, chunksize=24*1024):
 
     if not out_filename:
@@ -48,6 +50,8 @@ def decrypt_file(key, in_filename, out_filename=None, chunksize=24*1024):
 
             outfile.truncate(origsize)
 
+
+
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
     if 'file' not in request.files:
@@ -62,6 +66,8 @@ def encrypt():
 
     return send_from_directory('uploadFolder',file.filename+'.enc') 
 
+
+
 @app.route('/decrypt', methods=['POST'])
 def decrypt():
     if 'file' not in request.files:
@@ -73,8 +79,6 @@ def decrypt():
 
     file.save('uploadFolder/'+file.filename)
     decrypt_file("bui xuan thuyMTA",'uploadFolder/'+file.filename, 'uploadFolder/a'+file.filename)
-
-    print('success')
 
     return send_from_directory('uploadFolder', 'a'+file.filename) 
 
